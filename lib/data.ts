@@ -39,7 +39,7 @@ export const experiencesData = [
     title: "NMIMS University",
     location: "BTech in Information Technology",
     description:
-      "I graduated with a Bachelor's degree in Information Technology from NMIMS University, India.",
+      "Graduated with a Bachelor's degree in Information Technology, building a strong foundation in programming, data structures, and software development.",
     icon: React.createElement(LuGraduationCap),
     date: "2020",
   },
@@ -47,7 +47,7 @@ export const experiencesData = [
     title: "Software Engineer",
     location: "Propix Technologies",
     description:
-      "I worked as a full stack web developer for 3 years. I also upskilled to the full stack.",
+      "Worked as a full-stack developer for 3 years, delivering scalable web applications while mastering the full software development lifecycle.",
     icon: React.createElement(CgWorkAlt),
     date: "2020 - 2023",
   },
@@ -55,14 +55,14 @@ export const experiencesData = [
     title: "Stevens institute of technology",
     location: "MS in Software Engineering",
     description:
-      "I am currently pursuing a Master's degree in Software Engineering from Stevens Institute of Technology, USA.",
+      "Currently pursuing a Master's degree in Software Engineering, gaining expertise in full-stack development, cloud technologies, and agile methodologies.",
     icon: React.createElement(LuGraduationCap),
     date: "2023 - Present",
   },
   {
     title: "Learning technology assistant",
     location: "Stevens institute of technology",
-    description: "------",
+    description: "Provide technical support by diagnosing and resolving issues with Audio/Visual equipment, networking, and LAN/TCP/IP systems while ensuring seamless operations.",
     icon: React.createElement(CgWorkAlt),
     date: "2024 - Present",
   },
@@ -82,6 +82,7 @@ export const projectsData = [
       "Git",
     ],
     imageUrl: reasearch_platform,
+    link: "https://github.com/Ajinkyabhamre/research-collaboration-platform",
   },
 
   {
@@ -90,6 +91,7 @@ export const projectsData = [
       "A web tool empowering users to identify seizure-affected brain areas through 3D visualization and ML-driven insights for improved surgical outcomes.",
     tags: ["React", "Node", "Python", "Mongodb", "Jest"],
     imageUrl: epicarehub,
+    link:"https://github.com/Ajinkyabhamre/SSWCS-555-EpiCareHub",
   },
   {
     title: "Job Application Tracker",
@@ -105,6 +107,7 @@ export const projectsData = [
       "Git",
     ],
     imageUrl: jobTracker,
+    link:"https://github.com/Ajinkyabhamre/Job-Application-Tracker",
   },
 ] as const;
 
@@ -121,10 +124,10 @@ export const skillsData = [
   "MongoDB",
   "Redux",
   "GraphQL",
-  "Apollo",
-  "Express",
+  "Java",
+  "AWS",
   "PostgreSQL",
   "Python",
   "Jest",
-  "Framer Motion",
+  "Docker",
 ] as const;
