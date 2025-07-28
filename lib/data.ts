@@ -62,13 +62,30 @@ export const experiencesData = [
   {
     title: "Learning technology assistant",
     location: "Stevens institute of technology",
-    description: "Provide technical support by diagnosing and resolving issues with Audio/Visual equipment, networking, and LAN/TCP/IP systems while ensuring seamless operations.",
+    description:
+      "Provide technical support by diagnosing and resolving issues with Audio/Visual equipment, networking, and LAN/TCP/IP systems while ensuring seamless operations.",
     icon: React.createElement(CgWorkAlt),
     date: "2024 - Present",
   },
 ] as const;
 
 export const projectsData = [
+  {
+    title: "Job Application Tracker",
+    description:
+      "A full-stack application to simplify job management with secure uploads, real-time visualizations, and location-based insights.",
+    tags: [
+      "JavaScript",
+      "Bootstrap",
+      "MongoDB",
+      "NodeJS",
+      "Cloudinary",
+      "Leaflet",
+      "Git",
+    ],
+    imageUrl: jobTracker,
+    link: "https://github.com/Ajinkyabhamre/Job-Application-Tracker",
+  },
   {
     title: "Research Collaboration Platform",
     description:
@@ -91,23 +108,7 @@ export const projectsData = [
       "A web tool empowering users to identify seizure-affected brain areas through 3D visualization and ML-driven insights for improved surgical outcomes.",
     tags: ["React", "Node", "Python", "Mongodb", "Jest"],
     imageUrl: epicarehub,
-    link:"https://github.com/Ajinkyabhamre/SSWCS-555-EpiCareHub",
-  },
-  {
-    title: "Job Application Tracker",
-    description:
-      "A full-stack application to simplify job management with secure uploads, real-time visualizations, and location-based insights.",
-    tags: [
-      "JavaScript",
-      "Bootstrap",
-      "MongoDB",
-      "NodeJS",
-      "Cloudinary",
-      "Leaflet",
-      "Git",
-    ],
-    imageUrl: jobTracker,
-    link:"https://github.com/Ajinkyabhamre/Job-Application-Tracker",
+    link: "https://github.com/Ajinkyabhamre/SSWCS-555-EpiCareHub",
   },
 ] as const;
 
