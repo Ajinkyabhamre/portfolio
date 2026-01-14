@@ -33,8 +33,8 @@ export default function Contact() {
 
       <p className="text-gray-700 -mt-6 dark:text-white/80">
         Please contact me directly at{" "}
-        <a className="underline" href="mailto:example@gmail.com">
-          abhamre50@gmail.com
+        <a className="underline" href="mailto:ajjubhamre@icloud.com">
+          ajjubhamre@icloud.com
         </a>{" "}
         or through this form.
       </p>
@@ -54,11 +54,27 @@ export default function Contact() {
       >
         <input
           className="h-14 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          name="senderName"
+          type="text"
+          required
+          maxLength={100}
+          placeholder="Your name"
+        />
+        <input
+          className="h-14 px-4 my-3 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
           name="senderEmail"
           type="email"
           required
           maxLength={500}
           placeholder="Your email"
+        />
+        {/* Honeypot field - hidden from users, bots will fill it */}
+        <input
+          type="text"
+          name="honeypot"
+          className="hidden"
+          tabIndex={-1}
+          autoComplete="off"
         />
         <textarea
           className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"

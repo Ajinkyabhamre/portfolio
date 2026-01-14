@@ -1,11 +1,17 @@
 import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
-import { FaReact } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import jobTracker from "@/public/jobtracker.jpeg";
-import epicarehub from "@/public/epicarehub.jpeg";
+import epicarehub from "@/public/epicarehub.png";
 import reasearch_platform from "@/public/research.png";
-//import holeDetection from "@/public/holeDetection.png";
+import {
+  epicarehubArchitecture,
+  epicarehubArchitectureSimplified,
+  stevensResearchArchitecture,
+  stevensResearchArchitectureSimplified,
+  jobTrackerArchitecture,
+  jobTrackerArchitectureSimplified,
+} from "./diagram-configs";
 
 export const links = [
   {
@@ -71,7 +77,40 @@ export const experiencesData = [
 
 export const projectsData = [
   {
-    title: "Job Application Tracker",
+    title: "Presurgical epilepsy detection platform",
+    description:
+      "A web tool empowering users to identify seizure-affected brain areas through 3D visualization and ML-driven insights for improved surgical outcomes.",
+    tags: ["React", "Node", "Python", "Mongodb", "Jest"],
+    imageUrl: epicarehub,
+    githubUrl: "https://github.com/Ajinkyabhamre/SSWCS-555-EpiCareHub",
+    liveUrl: "https://epicarehub-frontend.vercel.app/",
+    featured: true,
+    impact: "Helping neurosurgeons make data-driven decisions for epilepsy treatment",
+    architecture: epicarehubArchitecture,
+    architectureSimplified: epicarehubArchitectureSimplified,
+  },
+  {
+    title: "Stevens research",
+    description:
+      "A web-based platform enabling professors, students, and researchers to create, manage, and collaborate on research projects seamlessly.",
+    tags: [
+      "ReactJS",
+      "GraphQL",
+      "MongoDB",
+      "Redis",
+      "Firebase Authentication",
+      "Git",
+    ],
+    imageUrl: reasearch_platform,
+    githubUrl: "https://github.com/Ajinkyabhamre/research-collaboration-platform",
+    liveUrl: "https://research-collaboration-platform-three.vercel.app/",
+    featured: false,
+    impact: "Streamlining academic collaboration across campus",
+    architecture: stevensResearchArchitecture,
+    architectureSimplified: stevensResearchArchitectureSimplified,
+  },
+  {
+    title: "Job application tracker",
     description:
       "A full-stack application to simplify job management with secure uploads, real-time visualizations, and location-based insights.",
     tags: [
@@ -84,31 +123,12 @@ export const projectsData = [
       "Git",
     ],
     imageUrl: jobTracker,
-    link: "https://github.com/Ajinkyabhamre/Job-Application-Tracker",
-  },
-  {
-    title: "Research Collaboration Platform",
-    description:
-      "A web-based platform enabling professors, students, and researchers to create, manage, and collaborate on research projects seamlessly.",
-    tags: [
-      "ReactJS",
-      "GraphQL",
-      "MongoDB",
-      "Redis",
-      "Firebase Authentication",
-      "Git",
-    ],
-    imageUrl: reasearch_platform,
-    link: "https://github.com/Ajinkyabhamre/research-collaboration-platform",
-  },
-
-  {
-    title: "Presurgical epilipsy detection Platform",
-    description:
-      "A web tool empowering users to identify seizure-affected brain areas through 3D visualization and ML-driven insights for improved surgical outcomes.",
-    tags: ["React", "Node", "Python", "Mongodb", "Jest"],
-    imageUrl: epicarehub,
-    link: "https://github.com/Ajinkyabhamre/SSWCS-555-EpiCareHub",
+    githubUrl: "https://github.com/Ajinkyabhamre/Job-Application-Tracker",
+    liveUrl: "https://job-tracker-production-5de4.up.railway.app/",
+    featured: false,
+    impact: "Simplifying job search with visual insights and organization",
+    architecture: jobTrackerArchitecture,
+    architectureSimplified: jobTrackerArchitectureSimplified,
   },
 ] as const;
 
