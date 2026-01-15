@@ -11,13 +11,18 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const submissionTimestamps = new Map<string, number[]>();
 
 export const sendEmail = async (formData: FormData) => {
+  console.log("📧 Server action called - sendEmail");
+
   const senderName = formData.get("senderName");
   const senderEmail = formData.get("senderEmail");
   const message = formData.get("message");
   const honeypot = formData.get("honeypot"); // Bot trap field
 
+  console.log("📝 Form data:", { senderName, senderEmail, messageLength: (message as string)?.length });
+
   // Bot detection - honeypot field should be empty
   if (honeypot) {
+    console.log("🚫 Spam detected");
     return {
       error: "Spam detected",
     };
@@ -63,6 +68,7 @@ export const sendEmail = async (formData: FormData) => {
 
   let data;
   try {
+    console.log("📤 Attempting to send email via Resend API...");
     data = await resend.emails.send({
       from: "Contact Form <onboarding@resend.dev>",
       to: "ajjubhamre@icloud.com",
@@ -74,9 +80,13 @@ export const sendEmail = async (formData: FormData) => {
         senderName: senderName as string,
       }) as React.ReactElement,
     });
+    console.log("✅ Email sent successfully:", data);
   } catch (error: unknown) {
+    console.error("❌ Error sending email:", error);
+    const errorMessage = getErrorMessage(error);
+    console.error("❌ Error message:", errorMessage);
     return {
-      error: getErrorMessage(error),
+      error: errorMessage,
     };
   }
 

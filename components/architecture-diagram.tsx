@@ -25,7 +25,7 @@ const NODE_HEIGHT = 35;
 const VIEWBOX_WIDTH = 800;
 const VIEWBOX_HEIGHT = 400;
 
-export default function ArchitectureDiagram({
+const ArchitectureDiagram = React.memo(function ArchitectureDiagram({
   config,
   className = "",
   showLabels = true,
@@ -35,10 +35,35 @@ export default function ArchitectureDiagram({
   const isDark = theme === "dark";
   const pathRefs = useRef<Map<string, SVGPathElement>>(new Map());
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const shouldAnimate = enableAnimations && !prefersReducedMotion();
+  const [isVisible, setIsVisible] = useState(true);
+  const diagramRef = useRef<HTMLDivElement>(null);
+  const shouldAnimate = enableAnimations && !prefersReducedMotion() && isVisible;
+
+  // Use IntersectionObserver to pause animations when diagram is off-screen
+  useEffect(() => {
+    const currentRef = diagramRef.current;
+    if (!currentRef) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 } // Trigger when 10% visible
+    );
+
+    observer.observe(currentRef);
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
 
   return (
-    <div className={`relative ${className}`}>
+    <div ref={diagramRef} className={`relative ${className}`}>
       {/* Header - Top-left chip */}
       <div className="absolute top-2 left-2 z-10 px-2 py-0.5 text-[10px] font-medium text-gray-500 dark:text-gray-400 bg-white/60 dark:bg-white/5 backdrop-blur-sm rounded-full border border-black/5 dark:border-white/10">
         System Architecture
@@ -113,6 +138,7 @@ export default function ArchitectureDiagram({
                 <AnimatedPacket
                   pathRef={pathRefs.current.get(edgeKey) || null}
                   isDark={isDark}
+                  isVisible={isVisible}
                 />
               )}
 
@@ -195,7 +221,7 @@ export default function ArchitectureDiagram({
       </svg>
     </div>
   );
-}
+});
 
 /**
  * Animated packet component that travels along an edge path
@@ -203,14 +229,16 @@ export default function ArchitectureDiagram({
 function AnimatedPacket({
   pathRef,
   isDark,
+  isVisible = true,
 }: {
   pathRef: SVGPathElement | null;
   isDark: boolean;
+  isVisible?: boolean;
 }) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    if (!pathRef) return;
+    if (!pathRef || !isVisible) return;
 
     let animationFrameId: number;
     let startTime: number | null = null;
@@ -236,7 +264,7 @@ function AnimatedPacket({
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [pathRef]);
+  }, [pathRef, isVisible]);
 
   return (
     <motion.circle
@@ -256,3 +284,5 @@ function AnimatedPacket({
     />
   );
 }
+
+export default ArchitectureDiagram;

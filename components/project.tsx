@@ -1,12 +1,20 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useRef, useState, useEffect } from "react";
 import { projectsData } from "@/lib/data";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaGithub, FaGlobe } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
-import ArchitectureDiagram from "./architecture-diagram";
 import { isMobileViewport, prefersReducedMotion } from "@/lib/architecture-diagram-utils";
+
+// Lazy load ArchitectureDiagram component
+const ArchitectureDiagram = dynamic(() => import("./architecture-diagram"), {
+  loading: () => (
+    <div className="w-full h-full min-h-[400px] bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg" />
+  ),
+  ssr: false, // Architecture diagrams don't need SSR
+});
 
 type ProjectProps = (typeof projectsData)[number];
 

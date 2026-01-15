@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import profilePic from "@/public/profilePic.jpeg";
 import Image from "next/image";
+import { profilePicBlurDataURL } from "@/lib/image-utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BsArrowRight, BsLinkedin } from "react-icons/bs";
@@ -31,12 +31,15 @@ export default function Intro() {
             }}
           >
             <Image
-              src={profilePic}
+              src="/profilePic-400.webp"
               alt="Ajinkya Bhamre"
-              width="192"
-              height="192"
-              quality="95"
+              width={192}
+              height={192}
+              quality={95}
               priority={true}
+              placeholder="blur"
+              blurDataURL={profilePicBlurDataURL}
+              sizes="(max-width: 640px) 128px, 192px"
               className="h-50 w-40 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
             />
           </motion.div>
@@ -91,7 +94,9 @@ export default function Intro() {
         <a
          className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
           href="/CV.pdf"
-          download="Ajinkya_bhamre_resume.pdf"
+          download="Ajinkya_Bhamre_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {" "}
           Download Resume{" "}

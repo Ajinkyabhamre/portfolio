@@ -1,9 +1,9 @@
 import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
 import { LuGraduationCap } from "react-icons/lu";
-import jobTracker from "@/public/jobtracker.jpeg";
-import epicarehub from "@/public/epicarehub.png";
-import reasearch_platform from "@/public/research.png";
+import jobTracker from "@/public/jobtracker.webp";
+import epicarehub from "@/public/epicarehub.webp";
+import reasearch_platform from "@/public/research.webp";
 import {
   epicarehubArchitecture,
   epicarehubArchitectureSimplified,
@@ -130,25 +130,4 @@ export const projectsData = [
     architecture: jobTrackerArchitecture,
     architectureSimplified: jobTrackerArchitectureSimplified,
   },
-] as const;
-
-export const skillsData = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "Git",
-  "Tailwind",
-  "MongoDB",
-  "Redux",
-  "GraphQL",
-  "Java",
-  "AWS",
-  "PostgreSQL",
-  "Python",
-  "Jest",
-  "Docker",
 ] as const;

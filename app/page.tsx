@@ -1,10 +1,24 @@
+import dynamic from "next/dynamic";
 import About from "@/components/about";
-import Contact from "@/components/contact";
-import Experience from "@/components/experience";
 import Intro from "@/components/intro";
-import Projects from "@/components/projects";
 import SectionDivider from "@/components/section-divider";
-import Skills from "@/components/skills";
+
+// Lazy load below-fold components
+const Projects = dynamic(() => import("@/components/projects"), {
+  loading: () => <div className="h-[800px]" />,
+});
+
+const Skills = dynamic(() => import("@/components/skills"), {
+  loading: () => <div className="h-[600px]" />,
+});
+
+const Experience = dynamic(() => import("@/components/experience"), {
+  loading: () => <div className="h-[800px]" />,
+});
+
+const Contact = dynamic(() => import("@/components/contact"), {
+  loading: () => <div className="h-[500px]" />,
+});
 
 export default function Home() {
   return (
