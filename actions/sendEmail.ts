@@ -80,7 +80,15 @@ export const sendEmail = async (formData: FormData) => {
         senderName: senderName as string,
       }) as React.ReactElement,
     });
-    console.log("✅ Email sent successfully:", data);
+    console.log("✅ Email sent successfully:", JSON.stringify(data, null, 2));
+
+    // Check if there's an error in the response
+    if (data.error) {
+      console.error("❌ Resend API returned error:", data.error);
+      return {
+        error: data.error.message || "Failed to send email",
+      };
+    }
   } catch (error: unknown) {
     console.error("❌ Error sending email:", error);
     const errorMessage = getErrorMessage(error);

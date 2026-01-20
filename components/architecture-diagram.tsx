@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
 import { useTheme } from "@/context/theme-context";
 import {
   getPointAlongPath,
@@ -287,19 +286,13 @@ function AnimatedPacket({
   }, [pathRef, isVisible]);
 
   return (
-    <motion.circle
+    <circle
       cx={position.x}
       cy={position.y}
       r="4"
       className={isDark ? "fill-purple-400" : "fill-purple-500"}
-      animate={{
-        opacity: [0, 1, 1, 0],
-      }}
-      transition={{
-        duration: 3,
-        repeat: Infinity,
-        ease: "linear",
-        times: [0, 0.1, 0.9, 1],
+      style={{
+        animation: 'packetPulse 3s linear infinite'
       }}
     />
   );

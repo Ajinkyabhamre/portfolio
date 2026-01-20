@@ -1,18 +1,15 @@
 "use client";
 import React from "react";
 import SectionHeading from "./section-heading";
-import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 export default function About() {
   const { ref } = useSectionInView("About", 0.6);
 
   return (
-    <motion.section
+    <section
       ref={ref}
       className="mb-28 max-w-[45rem] text-center leading-8 sm:mb-40 scroll-m-28"
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.175 }}
+      style={{ animation: 'fadeSlideUp 0.5s ease-out both' }}
       id="about"
     >
       <SectionHeading>About me</SectionHeading>
@@ -33,6 +30,6 @@ export default function About() {
         committed to leveraging <span className="font-medium">innovation</span>{" "}
         to solve real-world challenges and deliver meaningful outcomes.
       </p>
-    </motion.section>
+    </section>
   );
 }

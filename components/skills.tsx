@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import SectionHeading from "./section-heading";
 import { skillCategories, SkillCategory, Skill } from "@/lib/skills";
 import { useSectionInView } from "@/lib/hooks";
-import { motion } from "framer-motion";
 import {
   HiCode,
   HiTemplate,
@@ -25,19 +24,6 @@ const iconMap: Record<string, React.ElementType> = {
   check: HiCheckCircle,
   sparkles: HiSparkles,
   workflow: HiCog,
-};
-
-const cardVariants = {
-  initial: { opacity: 0, y: 40 },
-  animate: (index: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.1 * index,
-      duration: 0.4,
-      ease: "easeOut",
-    },
-  }),
 };
 
 // Removed pill animations for better performance - animate only cards
@@ -80,13 +66,11 @@ function SkillCard({
   const hiddenCount = category.skills.length - VISIBLE_LIMIT;
 
   return (
-    <motion.div
-      variants={cardVariants}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true }}
-      custom={index}
+    <div
       className="group"
+      style={{
+        animation: `fadeSlideUp 0.4s ease-out ${index * 0.1}s both`
+      }}
     >
       {/* Gradient border wrapper */}
       <div className="p-[1px] rounded-2xl bg-gradient-to-br from-purple-200/40 via-transparent to-pink-200/40 dark:from-purple-500/15 dark:via-transparent dark:to-pink-500/15">
@@ -127,7 +111,7 @@ function SkillCard({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

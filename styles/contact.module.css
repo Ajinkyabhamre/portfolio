@@ -1,0 +1,19 @@
+/* Contact section animations - CSS only for better performance */
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  section {
+    animation: none !important;
+  }
+}

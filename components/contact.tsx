@@ -2,7 +2,6 @@
 
 import React from "react";
 import SectionHeading from "./section-heading";
-import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { sendEmail } from "@/actions/sendEmail";
 import SubmitBtn from "./submit-btn";
@@ -12,24 +11,11 @@ export default function Contact() {
   const { ref } = useSectionInView("Contact");
 
   return (
-    <motion.section
+    <section
       id="contact"
       ref={ref}
       className="mb-20 sm:mb-28 w-[min(100%,42rem)] mx-auto px-4"
-      initial={{
-        opacity: 0,
-        y: 40,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.5,
-      }}
-      viewport={{
-        once: true,
-      }}
+      style={{ animation: 'fadeSlideUp 0.5s ease-out both' }}
     >
       <SectionHeading>Contact me</SectionHeading>
 
@@ -112,6 +98,6 @@ export default function Contact() {
           </form>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
