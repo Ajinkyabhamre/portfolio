@@ -22,7 +22,6 @@ export default function Project({
   title,
   description,
   tags,
-  imageUrl,
   githubUrl,
   liveUrl,
   featured,

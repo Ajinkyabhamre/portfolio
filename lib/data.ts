@@ -1,9 +1,6 @@
 import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
 import { LuGraduationCap } from "react-icons/lu";
-import jobTracker from "@/public/jobtracker.webp";
-import epicarehub from "@/public/epicarehub.webp";
-import reasearch_platform from "@/public/research.webp";
 import {
   epicarehubArchitecture,
   epicarehubArchitectureSimplified,
@@ -81,7 +78,6 @@ export const projectsData = [
     description:
       "A web tool empowering users to identify seizure-affected brain areas through 3D visualization and ML-driven insights for improved surgical outcomes.",
     tags: ["React", "Node", "Python", "Mongodb", "Jest"],
-    imageUrl: epicarehub,
     githubUrl: "https://github.com/Ajinkyabhamre/SSWCS-555-EpiCareHub",
     liveUrl: "https://epicarehub-frontend.vercel.app/",
     featured: true,
@@ -101,7 +97,6 @@ export const projectsData = [
       "Firebase Authentication",
       "Git",
     ],
-    imageUrl: reasearch_platform,
     githubUrl: "https://github.com/Ajinkyabhamre/research-collaboration-platform",
     liveUrl: "https://research-collaboration-platform-three.vercel.app/",
     featured: false,
@@ -122,7 +117,6 @@ export const projectsData = [
       "Leaflet",
       "Git",
     ],
-    imageUrl: jobTracker,
     githubUrl: "https://github.com/Ajinkyabhamre/Job-Application-Tracker",
     liveUrl: "https://job-tracker-production-5de4.up.railway.app/",
     featured: false,
