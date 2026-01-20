@@ -1,0 +1,49 @@
+/* Intro animations - CSS only for better performance */
+
+@keyframes fadeScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profilePic {
+  animation: fadeScaleIn 0.1s ease-out;
+}
+
+.waveEmoji {
+  animation: fadeScaleIn 0.15s ease-out 0.05s both;
+}
+
+.headline {
+  animation: fadeSlideUp 0.15s ease-out 0.05s both;
+}
+
+.cta {
+  animation: fadeSlideUp 0.15s ease-out 0.1s both;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .profilePic,
+  .waveEmoji,
+  .headline,
+  .cta {
+    animation: none !important;
+  }
+}

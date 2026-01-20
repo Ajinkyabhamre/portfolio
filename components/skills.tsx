@@ -40,19 +40,8 @@ const cardVariants = {
   }),
 };
 
-const pillVariants = {
-  initial: { opacity: 0, scale: 0.8 },
-  animate: (index: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delay: 0.03 * index,
-      duration: 0.2,
-    },
-  }),
-};
-
-function SkillPill({ skill, index }: { skill: Skill; index: number }) {
+// Removed pill animations for better performance - animate only cards
+function SkillPill({ skill }: { skill: Skill }) {
   const levelStyles: Record<string, string> = {
     primary:
       "bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-500/20 dark:to-pink-500/20 text-gray-800 dark:text-white border-purple-200/50 dark:border-purple-500/30",
@@ -63,19 +52,14 @@ function SkillPill({ skill, index }: { skill: Skill; index: number }) {
   };
 
   return (
-    <motion.span
-      variants={pillVariants}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true }}
-      custom={index}
+    <span
       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border font-medium transition-all duration-200 hover:scale-[1.02] ${levelStyles[skill.level]}`}
     >
       {skill.level === "primary" && (
         <span className="w-1.5 h-1.5 rounded-full bg-purple-500 dark:bg-purple-400" />
       )}
       {skill.name}
-    </motion.span>
+    </span>
   );
 }
 
@@ -121,8 +105,8 @@ function SkillCard({
 
           {/* Skills pills */}
           <div className="flex flex-wrap gap-2">
-            {visibleSkills.map((skill, skillIndex) => (
-              <SkillPill key={skill.name} skill={skill} index={skillIndex} />
+            {visibleSkills.map((skill) => (
+              <SkillPill key={skill.name} skill={skill} />
             ))}
             {needsExpand && !isExpanded && (
               <button

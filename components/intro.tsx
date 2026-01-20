@@ -2,17 +2,16 @@
 import React from "react";
 import Image from "next/image";
 import { profilePicBlurDataURL } from "@/lib/image-utils";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { BsArrowRight, BsLinkedin } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import { FaGithubSquare } from "react-icons/fa";
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
-import { prefersReducedMotion } from "@/lib/architecture-diagram-utils";
+import styles from "@/styles/intro.module.css";
+import clsx from "clsx";
 
 export default function Intro() {
-  const reduceMotion = prefersReducedMotion();
   const { ref } = useSectionInView("Home", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
   return (
@@ -23,14 +22,7 @@ export default function Intro() {
     >
       <div className="flex items-center justify-center">
         <div className="relative">
-          <motion.div
-            initial={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: "tween",
-              duration: 0.1,
-            }}
-          >
+          <div className={styles.profilePic}>
             <Image
               src="/profilePic-400.webp"
               alt="Ajinkya Bhamre"
@@ -43,27 +35,20 @@ export default function Intro() {
               sizes="(max-width: 640px) 128px, 192px"
               className="h-50 w-40 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
             />
-          </motion.div>
-          <motion.span
-            className="absolute bottom-0 right-4 text-5xl"
-            initial={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={reduceMotion ? { duration: 0 } : {
-              type: "tween",
-              delay: 0.05,
-              duration: 0.15,
-            }}
+          </div>
+          <span
+            className={clsx("absolute bottom-0 right-4 text-5xl", styles.waveEmoji)}
           >
             👋
-          </motion.span>
+          </span>
         </div>
       </div>
 
-      <motion.p
-        className="mb-10 mt-4 px-4 text-2xl font-medium !leading-[1.5] sm:text-4xl"
-        initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.15 }}
+      <p
+        className={clsx(
+          "mb-10 mt-4 px-4 text-2xl font-medium !leading-[1.5] sm:text-4xl",
+          styles.headline
+        )}
       >
         <span className="font-bold">Hello, I'm Ajinkya.</span> I'm a{" "}
         <span className="font-bold">Full-Stack Developer</span> focused on{" "}
@@ -71,15 +56,12 @@ export default function Intro() {
           delivering high-quality web applications and services
         </span>
         .
-      </motion.p>
-      <motion.div
-        className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium"
-        initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: reduceMotion ? 0 : 0.05,
-          duration: 0.15,
-        }}
+      </p>
+      <div
+        className={clsx(
+          "flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium",
+          styles.cta
+        )}
       >
         <Link
           href="#contact"
@@ -120,7 +102,7 @@ export default function Intro() {
           {" "}
           <FaGithubSquare />{" "}
         </a>
-      </motion.div>
+      </div>
     </section>
   );
 }

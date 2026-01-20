@@ -50,7 +50,7 @@ const ArchitectureDiagram = React.memo(function ArchitectureDiagram({
           setIsVisible(entry.isIntersecting);
         });
       },
-      { threshold: 0.1 } // Trigger when 10% visible
+      { threshold: 0.5, rootMargin: "-50px" } // Trigger when 50% visible, with margin
     );
 
     observer.observe(currentRef);
@@ -236,9 +236,21 @@ function AnimatedPacket({
   isVisible?: boolean;
 }) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const pathLengthRef = useRef<number>(0);
+
+  // Cache path length once on mount to avoid expensive getTotalLength() calls on every frame
+  useEffect(() => {
+    if (pathRef) {
+      try {
+        pathLengthRef.current = pathRef.getTotalLength();
+      } catch (error) {
+        console.error('Error getting path length:', error);
+      }
+    }
+  }, [pathRef]);
 
   useEffect(() => {
-    if (!pathRef || !isVisible) return;
+    if (!pathRef || !isVisible || pathLengthRef.current === 0) return;
 
     let animationFrameId: number;
     let startTime: number | null = null;
@@ -249,9 +261,13 @@ function AnimatedPacket({
       const elapsed = timestamp - startTime;
       const progress = (elapsed % duration) / duration; // 0 to 1, looping
 
-      const point = getPointAlongPath(pathRef, progress);
-      if (point) {
-        setPosition(point);
+      // Use cached path length instead of calling getTotalLength() on every frame
+      try {
+        const distance = pathLengthRef.current * progress;
+        const point = pathRef.getPointAtLength(distance);
+        setPosition({ x: point.x, y: point.y });
+      } catch (error) {
+        // Silently fail - animation will just stop
       }
 
       animationFrameId = requestAnimationFrame(animate);
