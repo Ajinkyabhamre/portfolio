@@ -52,8 +52,8 @@ export default function Project({
 
   // Choose diagram config based on viewport
   const diagramConfig = isMobile ? architectureSimplified : architecture;
-  const showLabels = !isMobile;
-  const enableAnimations = !reduceMotion;
+  const showLabels = true;  // Always show labels, use responsive sizing instead
+  const enableAnimations = !isMobile && !reduceMotion;  // Disable animations on mobile for better performance
 
   if (featured) {
     // Featured project - larger, hero-style layout

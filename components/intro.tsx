@@ -28,7 +28,7 @@ export default function Intro() {
               alt="Ajinkya Bhamre"
               width={192}
               height={192}
-              quality={95}
+              quality={80}
               priority={true}
               placeholder="blur"
               blurDataURL={profilePicBlurDataURL}

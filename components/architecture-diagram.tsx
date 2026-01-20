@@ -10,6 +10,7 @@ import {
   percentToCoords,
   getEdgeKey,
   prefersReducedMotion,
+  isMobileViewport,
 } from "@/lib/architecture-diagram-utils";
 import type { DiagramConfig, DiagramNode, DiagramEdge } from "@/lib/diagram-configs";
 
@@ -50,7 +51,10 @@ const ArchitectureDiagram = React.memo(function ArchitectureDiagram({
           setIsVisible(entry.isIntersecting);
         });
       },
-      { threshold: 0.5, rootMargin: "-50px" } // Trigger when 50% visible, with margin
+      {
+        threshold: isMobileViewport() ? 0.2 : 0.5,
+        rootMargin: isMobileViewport() ? "0px" : "-50px"
+      }
     );
 
     observer.observe(currentRef);
@@ -126,7 +130,7 @@ const ArchitectureDiagram = React.memo(function ArchitectureDiagram({
                 <text
                   x={(fromPoint.x + toPoint.x) / 2}
                   y={(fromPoint.y + toPoint.y) / 2 - 8}
-                  className="text-[10px] fill-gray-500 dark:fill-gray-400"
+                  className="text-[7px] sm:text-[10px] fill-gray-500 dark:fill-gray-400"
                   textAnchor="middle"
                 >
                   {edge.label}
@@ -147,7 +151,7 @@ const ArchitectureDiagram = React.memo(function ArchitectureDiagram({
                 <text
                   x={(fromPoint.x + toPoint.x) / 2}
                   y={(fromPoint.y + toPoint.y) / 2 + 15}
-                  className="text-[8px] fill-gray-400 dark:fill-gray-500"
+                  className="text-[10px] sm:text-[12px] fill-gray-400 dark:fill-gray-500"
                   textAnchor="middle"
                 >
                   ⇄
@@ -193,7 +197,7 @@ const ArchitectureDiagram = React.memo(function ArchitectureDiagram({
                 <text
                   x={coords.x + NODE_WIDTH / 2}
                   y={coords.y + NODE_HEIGHT / 2}
-                  className="text-[10px] font-medium"
+                  className="text-[8px] sm:text-[10px] font-medium"
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fill={colors.text}
