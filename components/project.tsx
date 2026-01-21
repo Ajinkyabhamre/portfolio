@@ -1,9 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { projectsData } from "@/lib/data";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { FaGithub, FaGlobe } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
 import { isMobileViewport, prefersReducedMotion } from "@/lib/architecture-diagram-utils";
@@ -13,7 +13,6 @@ const ArchitectureDiagram = dynamic(() => import("./architecture-diagram"), {
   loading: () => (
     <div className="w-full h-full min-h-[400px] bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg" />
   ),
-  ssr: false, // Architecture diagrams don't need SSR
 });
 
 type ProjectProps = (typeof projectsData)[number];
@@ -29,13 +28,10 @@ export default function Project({
   architecture,
   architectureSimplified,
 }: ProjectProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["0 1", "1.33 1"],
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
   });
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
   // Detect mobile and reduced motion preferences
   const [isMobile, setIsMobile] = useState(false);
@@ -58,13 +54,11 @@ export default function Project({
   if (featured) {
     // Featured project - larger, hero-style layout
     return (
-      <motion.div
+      <div
         ref={ref}
-        style={{
-          scale: scaleProgress,
-          opacity: opacityProgress,
-        }}
-        className="group mb-8"
+        className={`group mb-8 transition-all duration-700 ${
+          inView ? 'opacity-100 scale-100' : 'opacity-60 scale-95'
+        }`}
       >
         {/* Gradient border wrapper */}
         <div className="p-[1px] rounded-2xl bg-gradient-to-br from-purple-200/50 via-transparent to-pink-200/50 dark:from-purple-500/20 dark:via-transparent dark:to-pink-500/20 hover:-translate-y-0.5 transition-transform duration-300">
@@ -137,19 +131,17 @@ export default function Project({
           </div>
         </div>
         </div>
-      </motion.div>
+      </div>
     );
   }
 
   // Regular project card - compact grid item
   return (
-    <motion.div
+    <div
       ref={ref}
-      style={{
-        scale: scaleProgress,
-        opacity: opacityProgress,
-      }}
-      className="group h-full"
+      className={`group h-full transition-all duration-700 ${
+        inView ? 'opacity-100 scale-100' : 'opacity-60 scale-95'
+      }`}
     >
       {/* Gradient border wrapper */}
       <div className="h-full p-[1px] rounded-xl bg-gradient-to-br from-purple-200/40 via-transparent to-pink-200/40 dark:from-purple-500/15 dark:via-transparent dark:to-pink-500/15 hover:-translate-y-0.5 transition-transform duration-300">
@@ -222,6 +214,6 @@ export default function Project({
         </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
